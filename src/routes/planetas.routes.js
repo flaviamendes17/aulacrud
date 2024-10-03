@@ -10,37 +10,40 @@ let planetas = [
     agua: false, //indicação de existência de agua.
     atm: ["JS", "NODE", "VS", "CODE"],
   },
-  {
-    id: Number(Math.floor(Math.random() * 999999 + 1)),
-    titulo: "truque de mestre",
-    genero: "drama",
-    emCartaz: false,
-  },
-  {
-    id: Number(Math.floor(Math.random() * 999999 + 1)),
-    titulo: "barbie",
-    genero: "fantasia",
-    emCartaz: false,
-  },
 ];
 //Rota para buscar todos os elementos do array planetas.
 planetasRoutes.get("/", (req, res) => {
   return res.status(200).send(planetas);
 });
 
-//Rota para criar novo filme marcante.
+//Rota para cadastrar um planeta.
 planetasRoutes.post("/", (req, res) => {
-  const { titulo, genero, emCartaz } = req.body;
+  const { 
+    nome,
+    temperatura,
+    agua,
+    atm,
+   } = req.body;
 
-  const novoFilme = {
+   if(!nome || !temperatura || !agua){
+    return res.status(400).send({ message: "Os campos, nome, temperatura e agua são obrigatórios!" }); 
+   }
+
+   //validação de existência de agua.
+   if(agua != "sim" && agua != "não"){
+    return res.status(400).send({ message: "Digite 'sim' ou 'não!'" });
+   }
+
+  const novoPlaneta = {
     id: Number(Math.floor(Math.random() * 999999 + 1)),
-    titulo,
-    genero,
-    emCartaz,
+    nome,
+    temperatura,
+    agua,
+    atm,
   };
 
-  planetas.push(novoFilme);
-  return res.status(201).send(planetas);
+  planetas.push(novoPlaneta);
+  return res.status(201).send({message: "planeta cadastrado", planeta: novoPlaneta});
 });
 
 // Rota para buscar um elemento específico do array planeta.
