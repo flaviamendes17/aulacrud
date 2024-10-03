@@ -1,0 +1,19 @@
+{
+  "name": "aulacrud",
+  "version": "1.0.0",
+  "description": "Projeto para resolução da atividade de back-end",
+  "main": "server.js",
+  "type": "module",  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "SENAI",
+    "nodeJS",
+    "Javascript",
+    "Back-End"
+  ],
+  "author": "Flavia Mendes",
+  "license": "MIT"
+}
